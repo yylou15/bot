@@ -14,7 +14,7 @@ def hello_world():
 
 @app.route('/callback', methods=['POST'])
 def decrypt():
-    challenge = json.loads(AESCipher("eh5NGHN8izW5HzkrZSaN5fmhdqvUIPmK").decrypt_string(request.get_json()['encrypt']))['challenge']
+    challenge = json.loads(AESCipher("eh5NGHN8izW5HzkrZSaN5fmhdqvUIPmK").decrypt_string(request.get_json()['encrypt']))
     print(challenge)
     return challenge
 
