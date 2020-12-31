@@ -32,7 +32,15 @@ def decrypt():
                 "text": xiaohua
             }
         })).text)
-        return "?"
+    else:
+        chat_id = data['event']['open_chat_id']
+        print(requests.post("https://open.feishu.cn/open-apis/message/v4/send/", headers=send_headers, data=json.dumps({
+            "chat_id": chat_id,
+            "msg_type": "text",
+            "content": {
+                "text": "你问我？"
+            }
+        })).text)
     return data
 
 
