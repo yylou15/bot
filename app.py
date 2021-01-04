@@ -38,10 +38,10 @@ def call_back():
         print(res['code'])
         print(res['code'] == 99991663)
         if res['code'] == 99991663:
-            token_res = json.loads(session.post("https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/", data={
+            token_res = json.loads(session.post("https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/", data=json.dumps({
                 "app_id": "cli_9f67c7eaccb0500b",
                 "app_secret": "opy4NazX54hx8W0CRj4cqdK1eF0oQBGw"
-            }).text)
+            })).text)
             print(token_res)
             send_headers['Authorization'] = "Bearer {}".format(token_res['tenant_access_token'])
             call_back()
