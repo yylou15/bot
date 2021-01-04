@@ -8,6 +8,9 @@ from util.AESCipher import AESCipher
 
 app = Flask(__name__)
 
+session = requests.Session()
+session.headers = send_headers
+
 
 @app.route('/')
 def hello_world():
@@ -15,7 +18,7 @@ def hello_world():
 
 
 @app.route('/callback', methods=['POST'])
-def decrypt():
+def call_back():
     data = json.loads(AESCipher("eh5NGHN8izW5HzkrZSaN5fmhdqvUIPmK").decrypt_string(request.get_json()['encrypt']))
     print(data)
     if '笑话' in data['event']['text_without_at_bot'].strip():
@@ -25,13 +28,20 @@ def decrypt():
         }).text)['result'][0]['content']
 
         chat_id = data['event']['open_chat_id']
-        print(requests.post("https://open.feishu.cn/open-apis/message/v4/send/", headers=send_headers, data=json.dumps({
+        res = json.loads(session.post("https://open.feishu.cn/open-apis/message/v4/send/", data=json.dumps({
             "chat_id": chat_id,
             "msg_type": "text",
             "content": {
                 "text": xiaohua
             }
         })).text)
+        if res['code'] == '99991663':
+            send_headers['Authorization'] = "Bearer {}".format(json.loads(session.post("https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/", data={
+                "app_id": "cli_9f67c7eaccb0500b",
+                "app_secret": "opy4NazX54hx8W0CRj4cqdK1eF0oQBGw"
+            }).text)['tenant_access_token'])
+            call_back()
+
     # else:
     #     chat_id = data['event']['open_chat_id']
     #     print(requests.post("https://open.feishu.cn/open-apis/message/v4/send/", headers=send_headers, data=json.dumps({
