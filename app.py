@@ -36,8 +36,8 @@ def call_back():
             }
         })).text)
         print(res['code'])
-        print(res['code'] == '99991663')
-        if res['code'] == '99991663':
+        print(res['code'] == 99991663)
+        if res['code'] == 99991663:
             send_headers['Authorization'] = "Bearer {}".format(json.loads(session.post("https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/", data={
                 "app_id": "cli_9f67c7eaccb0500b",
                 "app_secret": "opy4NazX54hx8W0CRj4cqdK1eF0oQBGw"
