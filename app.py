@@ -18,7 +18,7 @@ def hello_world():
 def decrypt():
     data = json.loads(AESCipher("eh5NGHN8izW5HzkrZSaN5fmhdqvUIPmK").decrypt_string(request.get_json()['encrypt']))
     print(data)
-    if data['event']['text_without_at_bot'].strip() == '整点笑话':
+    if '笑话' in data['event']['text_without_at_bot'].strip():
         xiaohua = json.loads(requests.post("http://api.apishop.net/common/joke/getJokesByRandom", data={
             "apiKey": "5ZULlnD5f01345b094672e3ea5b6f7e1d299e1777930ac3",
             "pageSize": "1"
