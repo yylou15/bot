@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="72be8284-323a-40c2-b899-2e7bb5d63fbb" name="ecs">
+        <fileTransfer rootFolder="/www/wwwroot/bot.lou-yy.com/py/bot" accessType="SFTP" host="47.106.244.113" port="22" sshConfigId="a954b27e-6d51-4e4f-a45f-2c2b3ac4159d" sshConfig="root@47.106.244.113:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
