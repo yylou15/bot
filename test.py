@@ -3,6 +3,7 @@ import time
 
 from api import oapi_session
 from api.api import get_group_members, send_message
+from api.baidu.text import text_correct
 from api.token import gen_tenant_token, gen_user_token, gen_app_token, gen_auth_code_url
 
 # print(requests.post("https://open.feishu.cn/open-apis/message/v4/send/", headers=send_headers, data=json.dumps({
@@ -28,5 +29,6 @@ from api.token import gen_tenant_token, gen_user_token, gen_app_token, gen_auth_
 # gen_app_token()
 # print(oapi_session.get(gen_auth_code_url()).text)
 
-gen_tenant_token()
-print(send_message("oc_26d4a527179347e43bc3e32f82b7bf67","<at user_id='6397926402162688258'></at>"), 0)
+# gen_tenant_token()
+# print(send_message("oc_26d4a527179347e43bc3e32f82b7bf67","<at user_id='6397926402162688258'></at>"), 0)
+print(text_correct("人工只能"))

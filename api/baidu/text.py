@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from aip import AipContentCensor
+from aip import AipContentCensor, AipNlp
 
 """ 你的 APPID AK SK """
 APP_ID = '23632338'
@@ -10,6 +10,7 @@ API_KEY = 'iOdlKgcSfjsMqIr5T2aSe6Zn'
 SECRET_KEY = 'PwX7drvhQfKQ2LiNmuVsGohrzZnquyUG'
 
 client = AipContentCensor(APP_ID, API_KEY, SECRET_KEY)
+textClient = AipNlp("18093160", "PF6eGkEh1Wn65qo6fzYwvfWZ", "VlQvfsGp2yImtbEGdTRGxB8NHzNkPPQe")
 
 
 def text_analysis(text: str) -> (bool, str):
@@ -24,9 +25,9 @@ def text_analysis(text: str) -> (bool, str):
 
 
 def text_correct(text: str) -> ({}):
-    host = 'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id={}&client_secret={}'.format(API_KEY,SECRET_KEY)
-    token = requests.get(host).json()['access_token']
-    res = requests.post("https://aip.baidubce.com/rpc/2.0/nlp/v1/ecnet?access_token={}".format(token),data=json.dumps({
-        "百度是一家人工只能公司"
-    }))
-    print(res)
+    res = textClient.ecnet(text)
+    ret = {}
+    if res and res['item']:
+        for wrongs in res['item']['vec_fragment']:
+            ret[wrongs["ori_frag"]] = wrongs['correct_frag']
+    return ret
