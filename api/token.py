@@ -7,15 +7,16 @@ app_id = "cli_9f67c7eaccb0500b"
 app_secret = "opy4NazX54hx8W0CRj4cqdK1eF0oQBGw"
 
 
-def gen_tenant_token() -> str:
-    token_res = json.loads(
-        oapi_session.post("https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
-                          data=json.dumps({
-                              "app_id": app_id,
-                              "app_secret": app_secret
-                          })).text)
-    oapi_session.headers['Authorization'] = "Bearer {}".format(token_res['tenant_access_token'])
-    return token_res['tenant_access_token']
+def gen_tenant_token():
+    while True:
+        token_res = json.loads(
+            oapi_session.post("https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+                              data=json.dumps({
+                                  "app_id": app_id,
+                                  "app_secret": app_secret
+                              })).text)
+        oapi_session.headers['Authorization'] = "Bearer {}".format(token_res['tenant_access_token'])
+        time.sleep(30 * 60)
 
 
 def gen_app_token() -> str:
