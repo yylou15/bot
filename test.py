@@ -29,4 +29,4 @@ from api.token import gen_tenant_token, gen_user_token, gen_app_token, gen_auth_
 # print(oapi_session.get(gen_auth_code_url()).text)
 
 gen_tenant_token()
-print(send_message("oc_26d4a527179347e43bc3e32f82b7bf67","测试哦"))
+print(send_message("oc_26d4a527179347e43bc3e32f82b7bf67","<at user_id='6397926402162688258'></at>"), 0)
